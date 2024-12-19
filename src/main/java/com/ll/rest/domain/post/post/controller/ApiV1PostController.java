@@ -1,5 +1,6 @@
 package com.ll.rest.domain.post.post.controller;
 
+import com.ll.rest.domain.post.post.dto.PostDto;
 import com.ll.rest.domain.post.post.entity.Post;
 import com.ll.rest.domain.post.post.service.PostService;
 import com.ll.rest.global.rsData.RsData;
@@ -23,12 +24,16 @@ public class ApiV1PostController {
 		return postService.findAllByOrderByIdDesc();
 	}
 
+	//GET만이 BASE의 엔티티를 가져온다.
+
 	@GetMapping("/{id}")
-	public Post getItem(
+	public PostDto getItem(
 			@PathVariable long id
 	) {
-		return postService.findById(id).get();
+		Post post = postService.findById(id).get();
+		return new PostDto(post);
 	}
+
 
 	@DeleteMapping("/{id}")
 	public RsData deleteItem(

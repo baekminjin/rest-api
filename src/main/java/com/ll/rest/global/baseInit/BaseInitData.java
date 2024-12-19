@@ -10,16 +10,17 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.transaction.annotation.Transactional;
 
+//샘플 데이터
 @Configuration
 @RequiredArgsConstructor
 public class BaseInitData {
     private final PostService postService;
-    @Autowired
-    @Lazy
+    @Autowired //new
+    @Lazy //필요할 때
     private BaseInitData self;
 
     @Bean
-    public ApplicationRunner baseInitDataApplicationRunner() {
+    public ApplicationRunner baseInitDataApplicationRunner() { //초기화 시 추가 작업
         return args -> {
             self.work1();
         };

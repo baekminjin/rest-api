@@ -11,7 +11,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Post extends BaseTime {
+public class Post extends BaseTime { //BaseTime이 BaseEntity도 상속 받음
     @Column(length = 100)
     private String title;
 
