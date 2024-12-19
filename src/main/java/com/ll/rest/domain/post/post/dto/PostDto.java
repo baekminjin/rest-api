@@ -1,15 +1,17 @@
 package com.ll.rest.domain.post.post.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ll.rest.domain.post.post.entity.Post;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 
-//post의 정보를 담았고 post를 노출시키지 않는다.
 @Getter
 public class PostDto {
 	private long id;
+	@JsonIgnore
 	private LocalDateTime createDate;
+	@JsonIgnore
 	private LocalDateTime modifyDate;
 	private String title;
 	private String content;
@@ -20,5 +22,14 @@ public class PostDto {
 		this.modifyDate = post.getModifyDate();
 		this.title = post.getTitle();
 		this.content = post.getContent();
+	}
+
+	//원하는 변수로 변경
+	public LocalDateTime getCreatedDatetime() {
+		return createDate;
+	}
+
+	public LocalDateTime getModifiedDatetime() {
+		return modifyDate;
 	}
 }
