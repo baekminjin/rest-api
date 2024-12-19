@@ -20,18 +20,22 @@ public class ApiV1PostController {
 	private final PostService postService;
 
 	@GetMapping
-	public List<Post> getItems() {
-		return postService.findAllByOrderByIdDesc();
+	public List<PostDto> getItems() {
+		return postService
+				.findAllByOrderByIdDesc()
+				.stream()
+				.map(PostDto::new)
+				.toList();
 	}
 
-	//GET만이 BASE의 엔티티를 가져온다.
 
 	@GetMapping("/{id}")
 	public PostDto getItem(
 			@PathVariable long id
 	) {
-		Post post = postService.findById(id).get();
-		return new PostDto(post);
+		return postService.findById(id)
+				.map(PostDto::new) //Dto로 변환
+				.orElseThrow();
 	}
 
 
