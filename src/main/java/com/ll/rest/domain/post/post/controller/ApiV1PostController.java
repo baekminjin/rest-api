@@ -101,8 +101,14 @@ public class ApiV1PostController {
 	) {
 	}
 
+	record PostWriteResBody(
+			PostDto item,
+			long totalCount
+	) {
+	}
+
 	@PostMapping
-	public RsData<PostDto> writeItem(
+	public RsData<PostWriteResBody> writeItem(
 			@RequestBody @Valid PostWriteReqBody reqBody
 	) {
 		Post post = postService.write(reqBody.title, reqBody.content);
@@ -110,7 +116,12 @@ public class ApiV1PostController {
 		return new RsData<>(
 				"200-1",
 				"%d번 글이 작성되었습니다.".formatted(post.getId()),
-				new PostDto(post)
+				new PostWriteResBody(
+						new PostDto(post),
+						postService.count()
+				//data 안의 item에 postDto를 넣고, totalCount에 count를 넣음
+
+				)
 		);
 	}
 }
