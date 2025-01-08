@@ -7,7 +7,7 @@ spring:
     active: dev
   output:
     ansi:
-      enabled: always
+      enabled: always #색깔
   datasource:
     url: jdbc:h2:./db_dev;MODE=MySQL
     username: sa
