@@ -1,8 +1,11 @@
 package com.ll.rest.global.rsData;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+@JsonInclude(JsonInclude.Include.NON_NULL) //null 값을 가진 필드는 포함하지 않도록
 @AllArgsConstructor
 @Getter
 public class RsData<T>  {
@@ -14,6 +17,8 @@ public class RsData<T>  {
 		this(resultCode, msg, null);
 	}
 
+
+	@JsonIgnore
 	public int getStatusCode() {
 		return Integer.parseInt(resultCode.split("-")[0]);
 	}

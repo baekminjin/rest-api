@@ -39,6 +39,7 @@ public class ResponseAspect {
     public Object handleResponse(ProceedingJoinPoint joinPoint) throws Throwable {
         //위의 조건 알맞는 경우에 실행
         Object proceed = joinPoint.proceed();
+
         if (proceed instanceof RsData<?>) {
             RsData<?> rsData = (RsData<?>) proceed;
             response.setStatus(rsData.getStatusCode());
