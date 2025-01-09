@@ -42,7 +42,7 @@ public class ApiV1PostController {
 
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<RsData<Void>> deleteItem( //null을 반환
+	public RsData<Void> deleteItem( //null을 반환
 			@PathVariable long id
 	) {
 		Post post = postService.findById(id).get();
@@ -50,11 +50,10 @@ public class ApiV1PostController {
 		postService.delete(post);
 
 		//바디에 아무것도 출력되지 않는다. (204)
-		return ResponseEntity
-				.status(HttpStatus.OK)
-				.body(new RsData<>(
-						"200-1","%d번 글이 삭제되었습니다.".formatted(id)
-				));
+		return new RsData<>(
+						"200-1",
+				"%d번 글이 삭제되었습니다.".formatted(id)
+				);
 	}
 
 	/*
@@ -113,14 +112,12 @@ public class ApiV1PostController {
 
 	@PostMapping
 	//ResponseEntity 헤더와 바디를 같이 사용할 때
-	public ResponseEntity <RsData <PostWriteResBody>> writeItem(
+	public RsData <PostWriteResBody> writeItem(
 			@RequestBody @Valid PostWriteReqBody reqBody
 	) {
 		Post post = postService.write(reqBody.title, reqBody.content);
 
-		return ResponseEntity
-				.status(HttpStatus.CREATED)
-				.body(new RsData<>(
+		return new RsData<>(
 						"201-1",
 						"%d번 글이 작성되었습니다.".formatted(post.getId()),
 						new PostWriteResBody(
@@ -128,6 +125,6 @@ public class ApiV1PostController {
 								postService.count()
 								//data 안의 item에 postDto를 넣고, totalCount에 count를 넣음
 						)
-				));
+				);
 	}
 }
