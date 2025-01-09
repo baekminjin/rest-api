@@ -42,7 +42,7 @@ public class ApiV1PostController {
 
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deleteItem( //null을 반환
+	public ResponseEntity<RsData<Void>> deleteItem( //null을 반환
 			@PathVariable long id
 	) {
 		Post post = postService.findById(id).get();
@@ -51,8 +51,10 @@ public class ApiV1PostController {
 
 		//바디에 아무것도 출력되지 않는다. (204)
 		return ResponseEntity
-				.noContent()
-				.build();
+				.status(HttpStatus.OK)
+				.body(new RsData<>(
+						"200-1","%d번 글이 삭제되었습니다.".formatted(id)
+				));
 	}
 
 	/*
