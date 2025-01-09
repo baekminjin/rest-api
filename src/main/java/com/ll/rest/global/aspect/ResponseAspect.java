@@ -1,5 +1,6 @@
 package com.ll.rest.global.aspect;
 
+import com.ll.rest.global.rsData.RsData;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -38,7 +39,10 @@ public class ResponseAspect {
     public Object handleResponse(ProceedingJoinPoint joinPoint) throws Throwable {
         //위의 조건 알맞는 경우에 실행
         Object proceed = joinPoint.proceed();
-        response.setStatus(201);
+        if (proceed instanceof RsData<?>) {
+            RsData<?> rsData = (RsData<?>) proceed;
+            response.setStatus(rsData.getStatusCode());
+        }
 
         return proceed;
     }
