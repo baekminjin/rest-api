@@ -4,6 +4,7 @@ import com.ll.rest.domain.member.member.entity.Member;
 import com.ll.rest.global.jpa.entity.BaseTime;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToOne;
 import lombok.*;
 
@@ -15,7 +16,7 @@ import lombok.*;
 @AllArgsConstructor
 public class Post extends BaseTime { //BaseTime이 BaseEntity도 상속 받음
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Member author;
 
     @Column(length = 100)
