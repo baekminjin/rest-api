@@ -21,6 +21,7 @@ import java.util.List;
 public class ApiV1PostController {
 	private final PostService postService;
 
+	//다건 조회
 	@GetMapping
 	public List<PostDto> getItems() {
 		return postService
@@ -31,6 +32,7 @@ public class ApiV1PostController {
 	}
 
 
+	//단건 조회
 	@GetMapping("/{id}")
 	public PostDto getItem(
 			@PathVariable long id
