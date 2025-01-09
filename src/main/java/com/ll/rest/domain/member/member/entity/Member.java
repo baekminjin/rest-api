@@ -12,7 +12,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Member extends BaseTime {
-	@Column(unique = true, length = 30)
+	@Column(unique = true, length = 30) //unique로 중복 불가
 	private String username;
 
 	@Column(length = 50)
